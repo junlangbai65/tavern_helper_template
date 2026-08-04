@@ -3,6 +3,7 @@ node_modules
 .DS_Store
 Thumbs.db
 
+<<<<<<< HEAD
 # Nested Agent Foundry Vault clone (own .git). Update with: pnpm vault:pull
 agent-foundry-vault/
 
@@ -12,6 +13,8 @@ agent-foundry-vault/
 **/__pycache__/
 *.pyc
 
+=======
+>>>>>>> ffcef6e22b372e2f3dcc1048bf50073234505d74
 *.log
 npm-debug.log*
 yarn-debug.log*
