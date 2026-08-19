@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * autoprefixer 在现行 browserslist 下常为 `backdrop-filter` 省略 `-webkit-backdrop-filter`，
  * 静态检测（如 Edge Tools compat-api）仍要求写入前缀。在压缩前补上一致的前缀声明。
@@ -131,6 +132,11 @@ const config = {
     normalizeBackdropFilter,
     require('postcss-minify'),
   ],
+=======
+/** @type {import('postcss-load-config').Config} */
+const config = {
+  plugins: [require('autoprefixer'), require('@tailwindcss/postcss'), require('postcss-minify')],
+>>>>>>> fe7d6686eaa214f144c2a734be2e26ca399f3d3d
 };
 
 module.exports = config;
