@@ -3,7 +3,10 @@ import HtmlInlineScriptWebpackPlugin from 'html-inline-script-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import _ from 'lodash';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+<<<<<<< HEAD
 import { createServer, type Server as HttpServer } from 'node:http';
+=======
+>>>>>>> 4a9344276d925a83e32726c58b9b05debdf4a8ad
 import { ChildProcess, exec, spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
@@ -23,7 +26,10 @@ const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').def
 
 interface Config {
   port: number;
+<<<<<<< HEAD
   staticPort: number;
+=======
+>>>>>>> 4a9344276d925a83e32726c58b9b05debdf4a8ad
   entries: Entry[];
 }
 interface Entry {
@@ -78,11 +84,15 @@ function glob_script_files() {
 
 const config: Config = {
   port: 6621,
+<<<<<<< HEAD
   staticPort: 6622,
+=======
+>>>>>>> 4a9344276d925a83e32726c58b9b05debdf4a8ad
   entries: glob_script_files().map(parse_entry),
 };
 
 let io: Server;
+<<<<<<< HEAD
 let staticServer: HttpServer;
 function watch_dist_static_server(compiler: webpack.Compiler) {
   if (!compiler.options.watch) {
@@ -130,6 +140,10 @@ function watch_dist_static_server(compiler: webpack.Compiler) {
 function watch_tavern_helper(compiler: webpack.Compiler) {
   if (compiler.options.watch) {
     watch_dist_static_server(compiler);
+=======
+function watch_tavern_helper(compiler: webpack.Compiler) {
+  if (compiler.options.watch) {
+>>>>>>> 4a9344276d925a83e32726c58b9b05debdf4a8ad
     if (!io) {
       const port = config.port ?? 6621;
       io = new Server(port, { cors: { origin: '*' } });
@@ -473,7 +487,10 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
             template: path.join(import.meta.dirname, entry.html),
             filename: path.parse(entry.html).base,
             scriptLoading: 'module',
+<<<<<<< HEAD
             inject: 'body',
+=======
+>>>>>>> 4a9344276d925a83e32726c58b9b05debdf4a8ad
             cache: false,
           }),
           new HtmlInlineScriptWebpackPlugin(),
@@ -501,6 +518,10 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
             { from: 'klona', imports: ['klona'] },
             { from: 'vue-final-modal', imports: ['useModal'] },
             { from: 'zod', imports: ['z'] },
+<<<<<<< HEAD
+=======
+            { from: 'type-fest', imports: [['*', 'TypeFest']], type: true },
+>>>>>>> 4a9344276d925a83e32726c58b9b05debdf4a8ad
           ],
         }),
         unpluginVueComponents({
@@ -609,9 +630,23 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
       const cdn = {
         sass: 'https://jspm.dev/sass',
       };
+<<<<<<< HEAD
       return callback(
         null,
         'module-import ' + (cdn[request as keyof typeof cdn] ?? `https://testingcf.jsdelivr.net/npm/${request}/+esm`),
+=======
+      const package_json = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, 'package.json'), 'utf-8')) as {
+        dependencies?: Record<string, string>;
+        devDependencies?: Record<string, string>;
+      };
+      const package_versions = { ...package_json.devDependencies, ...package_json.dependencies };
+      const version = package_versions[request]?.replace(/^[~^]/, '');
+      const versioned_request = /^[.\d]+$/.test(version) ? `${request}@${version}` : request;
+      return callback(
+        null,
+        'module-import ' +
+          (cdn[request as keyof typeof cdn] ?? `https://testingcf.jsdelivr.net/npm/${versioned_request}/+esm`),
+>>>>>>> 4a9344276d925a83e32726c58b9b05debdf4a8ad
       );
     },
   });
